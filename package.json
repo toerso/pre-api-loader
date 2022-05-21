@@ -6,7 +6,7 @@
   "module": "dist/esm/index.esm.js",
   "scripts": {
     "prepack": "rm -rf dist && rollup -c",
-    "prepublish": "npm run build && npm run bump-version",
+    "prepublish": "npm run prepack && npm run bump-version",
     "publish:public": "npm publish --access public"
   },
   "repository": {
