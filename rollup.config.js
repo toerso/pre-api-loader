@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
 import babel from '@rollup/plugin-babel';
+import commonjs from "rollup-plugin-commonjs";
 import cleanUp from 'rollup-plugin-cleanup';
 
 const extensions = ['.js', '.ts'];
@@ -21,6 +22,7 @@ export default [
                 exports: 'named'
             }
         ],
+        external: ['@babel/runtime'],
         plugins: [
             resolve({
                 extensions
@@ -28,7 +30,10 @@ export default [
             babel({
                 exclude: 'node_modules/**',
                 extensions,
-                babelHelpers: "bundled"
+                babelHelpers: "runtime",
+            }),
+            commonjs({
+                include: /node_modules/
             }),
             cleanUp()
         ]
